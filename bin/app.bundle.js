@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,93 +86,78 @@ module.exports = require("winston");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = function (originalModule) {
-	if (!originalModule.webpackPolyfill) {
-		var module = Object.create(originalModule);
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function () {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function () {
-				return module.i;
-			}
-		});
-		Object.defineProperty(module, "exports", {
-			enumerable: true
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 /**
  * Contains the Web site visitor tracking information model.
  */
 
 
 
+var _mongoose = __webpack_require__(0);
 
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
-const WebsiteVisitorSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
-    date: { type: Date, default: () => Date.now() },
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WebsiteVisitorSchema = new _mongoose2.default.Schema({
+    date: { type: Date, default: function _default() {
+            return Date.now();
+        } },
     ip: { type: String },
     userAgent: { type: String },
     sessionId: { type: String }
 });
 
-module.exports = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('WebsiteVisitor', WebsiteVisitorSchema);
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)(module)))
+module.exports = _mongoose2.default.model('WebsiteVisitor', WebsiteVisitorSchema);
 
 /***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_body_parser__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_body_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_express__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid_v1__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid_v1___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid_v1__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_winston__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_winston___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_winston__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_RSVP__ = __webpack_require__(10);
 /**
  * Implements the server API.
  */
 
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
+var _bodyParser = __webpack_require__(10);
 
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
+var _express = __webpack_require__(1);
 
+var _express2 = _interopRequireDefault(_express);
 
+var _mongoose = __webpack_require__(0);
 
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _v = __webpack_require__(11);
+
+var _v2 = _interopRequireDefault(_v);
+
+var _winston = __webpack_require__(2);
+
+var _winston2 = _interopRequireDefault(_winston);
+
+var _RSVP = __webpack_require__(9);
+
+var _RSVP2 = _interopRequireDefault(_RSVP);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Setup the web server handlers
-const ServerAPI = __WEBPACK_IMPORTED_MODULE_1_express___default()();
+var ServerAPI = (0, _express2.default)();
 
 // Ensure we can parse JSON-encoded requests
-ServerAPI.use(__WEBPACK_IMPORTED_MODULE_0_body_parser___default.a.json());
+ServerAPI.use(_bodyParser2.default.json());
 
 // Help for the web service
 ServerAPI.all('/', function (req, res) {
@@ -189,8 +174,8 @@ ServerAPI.all('/', function (req, res) {
 
 // The 'rsvp' command
 ServerAPI.post('/rsvp', function (req, res) {
-    const requestId = __WEBPACK_IMPORTED_MODULE_3_uuid_v1___default()();
-    __WEBPACK_IMPORTED_MODULE_4_winston___default.a.log('debug', 'rsvp request', requestId, req.body);
+    var requestId = (0, _v2.default)();
+    _winston2.default.log('debug', 'rsvp request', requestId, req.body);
 
     var guestRSVPDocument = {
         rsvpId: requestId,
@@ -202,117 +187,126 @@ ServerAPI.post('/rsvp', function (req, res) {
         guestRSVPDocument.guestPlusOne = req.body.guestPlusOne;
     }
 
-    new __WEBPACK_IMPORTED_MODULE_5__models_RSVP__["default"](guestRSVPDocument).save(function (err) {
+    new _RSVP2.default(guestRSVPDocument).save(function (err) {
         var code = 200;
         var responseJson = {
             requestId: requestId
         };
 
         if (err) {
-            __WEBPACK_IMPORTED_MODULE_4_winston___default.a.log('info', 'mongodb write failed', requestId, req.body, err);
+            _winston2.default.log('info', 'mongodb write failed', requestId, req.body, err);
             code = 500;
             responseJson.error = 'Failed to persist reservation to database';
         }
 
         res.status(code).json(responseJson);
 
-        __WEBPACK_IMPORTED_MODULE_4_winston___default.a.log('debug', 'rsvp response', requestId, responseJson);
+        _winston2.default.log('debug', 'rsvp response', requestId, responseJson);
     });
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (ServerAPI);
+exports.default = ServerAPI;
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("async");
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie-parser");
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("universal-analytics");
 
 /***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_async__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_async___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_async__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_cookie_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_express__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_analytics__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_universal_analytics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_universal_analytics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_winston__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_winston___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_winston__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__server_api__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_WebsiteVisitor__ = __webpack_require__(4);
 /**
  * Main entry point for the express server.
  */
 
 
 
+var _async = __webpack_require__(5);
 
+var _async2 = _interopRequireDefault(_async);
 
+var _cookieParser = __webpack_require__(6);
 
+var _cookieParser2 = _interopRequireDefault(_cookieParser);
 
+var _express = __webpack_require__(1);
 
+var _express2 = _interopRequireDefault(_express);
 
+var _mongoose = __webpack_require__(0);
 
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _universalAnalytics = __webpack_require__(7);
 
+var _universalAnalytics2 = _interopRequireDefault(_universalAnalytics);
+
+var _winston = __webpack_require__(2);
+
+var _winston2 = _interopRequireDefault(_winston);
+
+var _serverApi = __webpack_require__(4);
+
+var _serverApi2 = _interopRequireDefault(_serverApi);
+
+var _WebsiteVisitor = __webpack_require__(3);
+
+var _WebsiteVisitor2 = _interopRequireDefault(_WebsiteVisitor);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Avoid mongoose Promise deprecation warning
-__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.Promise = global.Promise;
+_mongoose2.default.Promise = global.Promise;
 
 // Web server port
-const webAppPort = process.env.PORT || 8000;
+var webAppPort = process.env.PORT || 8000;
 
 // MongoDB connection string
-const mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wedding';
+var mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/wedding';
 
 // Logging level
-__WEBPACK_IMPORTED_MODULE_5_winston___default.a.level = process.env.LOG_LEVEL || 'debug';
+_winston2.default.level = process.env.LOG_LEVEL || 'debug';
 
 // The Web server chain
-const WebApp = __WEBPACK_IMPORTED_MODULE_2_express___default()();
+var WebApp = (0, _express2.default)();
 WebApp.set('trust proxy', true);
 
 // Execute the initialization sequence
-__WEBPACK_IMPORTED_MODULE_0_async___default.a.waterfall([function setupMongoDBConnection(callback) {
-    __WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connect(mongodbUri, function (err, res) {
+_async2.default.waterfall([function setupMongoDBConnection(callback) {
+    _mongoose2.default.connect(mongodbUri, function (err, res) {
         if (err) {
-            __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('error', 'Failed to connect to mongodb', mongodbUri, err);
+            _winston2.default.log('error', 'Failed to connect to mongodb', mongodbUri, err);
             callback(err);
         } else {
-            __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('debug', 'Successfully connected to mongodb', mongodbUri, res);
+            _winston2.default.log('debug', 'Successfully connected to mongodb', mongodbUri, res);
             callback(null);
         }
     });
 }, function setupMongoDBUserTracking(callback) {
-    WebApp.use('/', __WEBPACK_IMPORTED_MODULE_1_cookie_parser___default()(), function (req, res, next) {
+    WebApp.use('/', (0, _cookieParser2.default)(), function (req, res, next) {
         if (req.path === '/') {
-            new __WEBPACK_IMPORTED_MODULE_7__models_WebsiteVisitor__["default"]({
+            new _WebsiteVisitor2.default({
                 ip: req.ip,
                 userAgent: req.headers['user-agent'],
                 sessionId: req.cookies['_ga']
-            }).save(err => {
+            }).save(function (err) {
                 if (err) {
-                    __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('info', 'Failed to write MongoDB user tracking data due to', JSON.stringify(err));
+                    _winston2.default.log('info', 'Failed to write MongoDB user tracking data due to', JSON.stringify(err));
                 }
             });
         }
@@ -327,21 +321,21 @@ __WEBPACK_IMPORTED_MODULE_0_async___default.a.waterfall([function setupMongoDBCo
         return;
     }
 
-    __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('info', 'Google analytics configuration detected. Enabling analytics.');
+    _winston2.default.log('info', 'Google analytics configuration detected. Enabling analytics.');
 
-    WebApp.use('/', __WEBPACK_IMPORTED_MODULE_4_universal_analytics___default.a.middleware(process.env.GOOGLE_ANALYTICS_ACCOUNT_ID, { cookieName: '_ga' }), function (req, res, next) {
+    WebApp.use('/', _universalAnalytics2.default.middleware(process.env.GOOGLE_ANALYTICS_ACCOUNT_ID, { cookieName: '_ga' }), function (req, res, next) {
         if (req.path === '/') {
-            const visitor = req.visitor;
-            const uaData = {
+            var visitor = req.visitor;
+            var uaData = {
                 ds: 'web',
                 dp: '/',
                 uip: req.ip,
                 ua: req.headers['user-agent']
             };
 
-            visitor.pageview(uaData, err => {
+            visitor.pageview(uaData, function (err) {
                 if (err) {
-                    __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('info', 'Failed to post Google analytics data due to', JSON.stringify(err), visitor, JSON.stringify(uaData));
+                    _winston2.default.log('info', 'Failed to post Google analytics data due to', JSON.stringify(err), visitor, JSON.stringify(uaData));
                 }
             });
         }
@@ -351,34 +345,36 @@ __WEBPACK_IMPORTED_MODULE_0_async___default.a.waterfall([function setupMongoDBCo
 
     callback(null);
 }, function startWebServer(callback) {
-    WebApp.use('/api', __WEBPACK_IMPORTED_MODULE_6__server_api__["a" /* default */]);
-    WebApp.use(__WEBPACK_IMPORTED_MODULE_2_express___default.a.static('static'));
+    WebApp.use('/api', _serverApi2.default);
+    WebApp.use(_express2.default.static('static'));
 
-    var server = WebApp.listen(webAppPort, () => {
-        __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('info', 'Web server listening on port', webAppPort);
+    var server = WebApp.listen(webAppPort, function () {
+        _winston2.default.log('info', 'Web server listening on port', webAppPort);
         callback(null);
     }).on('error', function onListenError(err) {
-        __WEBPACK_IMPORTED_MODULE_5_winston___default.a.log('error', 'Web server failed to listen on port', webAppPort, err);
+        _winston2.default.log('error', 'Web server failed to listen on port', webAppPort, err);
         callback(err);
     });
 }], function final(err, result) {});
 
 /***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 /**
  * Contains the RSVP information model.
  */
 
 
 
+var _mongoose = __webpack_require__(0);
 
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
-const GuestSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GuestSchema = new _mongoose2.default.Schema({
     name: { type: String, required: true },
     email: String,
     meal: String,
@@ -387,25 +383,26 @@ const GuestSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema(
     hangoverBrunch: String
 });
 
-const RSVPSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+var RSVPSchema = new _mongoose2.default.Schema({
     rsvpId: { type: String, required: true },
-    date: { type: Date, default: () => Date.now() },
+    date: { type: Date, default: function _default() {
+            return Date.now();
+        } },
     guest: { type: GuestSchema, required: true },
     willAttend: { type: Boolean, required: true },
     guestPlusOne: GuestSchema
 });
 
-module.exports = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('RSVP', RSVPSchema);
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)(module)))
+module.exports = _mongoose2.default.model('RSVP', RSVPSchema);
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("uuid/v1");

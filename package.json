@@ -1,7 +1,7 @@
 {
-  "name": "meganmikewedding",
+  "name": "jociandkalwedding",
   "version": "1.0.0",
-  "description": "Megan & Mike Wedding Website",
+  "description": "Jocelyn & Kal Wedding Website",
   "private": true,
   "bin": "./bin/app.bundle.js",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iggy788/wedding-site.git"
+    "url": "git+https://github.com/kaloianm/wedding.git"
   },
-  "author": "iggy788",
+  "author": "Kaloian Manassiev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iggy788/wedding-site.git"
+    "url": "https://github.com/kaloianm/wedding/issues"
   },
-  "homepage": "https://github.com/iggy788/wedding-site.git#readme",
+  "homepage": "https://github.com/kaloianm/wedding#readme",
   "dependencies": {
     "async": "^2.5.0",
     "body-parser": "^1.15.2",
